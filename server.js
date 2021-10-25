@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require("path");
-
+const dotenv = require("dotenv")
 const app = express()
+const port = process.env.PORT
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
@@ -20,6 +21,6 @@ app.get('/', (req, res) => {
     })
 })
 
-app.listen(4000, (req, res) => {
-    console.log('server on 4000')
+app.listen(port, (req, res) => {
+    console.log(`server on ${port}`)
 })
