@@ -1,18 +1,19 @@
 const express = require('express')
 const path = require("path");
-const dotenv = require("dotenv")
+require('dotenv').config()
 const app = express()
 const port = process.env.PORT
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 
-app.use('/', (req, res) => {
-    res.sendFile(path.join('client', 'build', 'index.html'))
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
 })
 
-app.get('/', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000")
+app.get('/tasks', (req, res) => {
+    res.header("Access-Control-Allow-Origin", `/`)
+
     res.send({
         id: 5,
         title: 'todo5',

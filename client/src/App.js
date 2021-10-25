@@ -5,7 +5,8 @@ import Tasks from './components/Tasks'
 import AddTask from "./components/AddTask";
 import React from 'react'
 import Button from "./components/Button";
-
+require('dotenv').config()
+const port = process.env.PORT
 
 function App() {
 		const [showAddTask, setShowAddTask] = useState(false)
@@ -14,16 +15,19 @@ function App() {
 		const getData = async () => {
 			try {
 
-				const res = await fetch('http://localhost:4000/', {
+				const res = await fetch(`/tasks`, {
+					method: 'GET',
 					cors: 'same-origin',
 					headers: {
-						'Origin': 'http://localhost:3000/reactproject'
+						'Origin': `/`,
+						'Content-Type': 'application/json'
 					}
 				})
 				const data = await res.json()
 				console.log(data)
 				setTasks([...tasks, data])
 			} catch (e) {
+				console.log('json error')
 				console.log(e)
 			}
 		}
