@@ -16,9 +16,14 @@ exports.getTasks = (req, res) => {
     // }).join(''))
 }
 
-exports.addTask = (req, res) => {
-    res.header("Access-Control-Allow-Origin", `/`)
+exports.addTask = async (req, res) => {
 
+    res.header("Access-Control-Allow-Origin", `/`)
+    if (!req.body) {
+        console.log('no body')
+    }
+    // console.log(req)
+    console.log(req.body)
     const newTask = new model.tasksDB({
         title: req.body.title,
         body: req.body.body,
