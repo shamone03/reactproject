@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect} from "react"
 import './index.css'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
-import AddTask from "./components/AddTask";
+import AddTask from "./components/AddTask"
 import React from 'react'
-import Button from "./components/Button";
+import Button from "./components/Button"
 require('dotenv').config()
 const port = process.env.PORT
 
@@ -25,7 +25,7 @@ function App() {
 				})
 				const data = await res.json()
 				console.log(data)
-				setTasks([...tasks, data])
+				setTasks([...tasks, ...data])
 			} catch (e) {
 				console.log('json error')
 				console.log(e)
