@@ -10,7 +10,9 @@ const model = require('./server/models/model')
 
 
 app.use(morgan('tiny'))
-app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 reactDB()
 
 app.use(express.static(path.join(__dirname, 'client', 'build')))

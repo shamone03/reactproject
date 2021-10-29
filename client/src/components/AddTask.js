@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
     const [title, setTitle] = useState('')
-    const [task, setTask] = useState('')
-    const [status, setStatus] = useState(false)
+    const [body, setBody] = useState('')
+    const [done, setDone] = useState(false)
 
 
     const submitForm = (e) => {
@@ -13,7 +13,7 @@ const AddTask = ({ onAdd }) => {
             alert('Enter a title')
             return
         }
-        onAdd({ title, task, status })
+        onAdd({ title, body, done })
     }
 
     return (
@@ -24,11 +24,11 @@ const AddTask = ({ onAdd }) => {
             </div>
             <div className="form-control">
                 <label htmlFor="">Task</label>
-                <input type="text" placeholder={'description'} onChange={(e) => setTask(e.target.value)} value={ task } />
+                <input type="text" placeholder={'description'} onChange={(e) => setBody(e.target.value)} value={ body } />
             </div>
             <div className="form-control">
                 <label htmlFor="">Status</label>
-                <input type="checkbox" onChange={(e) => setStatus(e.currentTarget.checked)} checked={ status }/>
+                <input type="checkbox" onChange={(e) => setDone(e.currentTarget.checked)} checked={ done }/>
             </div>
             <input type="submit" name="" className="btn btn-block" value={'Add Task'}/>
         </form>

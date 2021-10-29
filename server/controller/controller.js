@@ -32,8 +32,11 @@ exports.addTask = async (req, res) => {
 
     newTask.save().then(data => {
         console.log('success', data)
+        res.status(200).send({message:'success'})
+        res.
     }).catch(err => {
         console.log(err)
+        res.status(500).send({message:'success'})
     })
 
 }

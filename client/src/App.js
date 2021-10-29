@@ -6,10 +6,14 @@ import AddTask from "./components/AddTask"
 import React from 'react'
 import Button from "./components/Button"
 require('dotenv').config()
-const port = process.env.PORT
+
 
 function App() {
-		const [showAddTask, setShowAddTask] = useState(false)
+	const [showAddTask, setShowAddTask] = useState(false)
+	//tasks is now available globally
+	const [tasks, setTasks] = useState([])
+	//variable to update the DOM, sometimes does it twice, too bad
+	const [render, setRender] = useState(false)
 
 	useEffect(() => {
 		const getData = async () => {
@@ -25,7 +29,7 @@ function App() {
 				})
 				const data = await res.json()
 				console.log(data)
-				setTasks([...tasks, ...data])
+				setTasks([...data])
 			} catch (e) {
 				console.log('json error')
 				console.log(e)
@@ -33,45 +37,43 @@ function App() {
 		}
 
 		getData()
-	}, [])
+	}, [render])
 
-	//tasks is now available globally
-	const [tasks, setTasks] = useState([
-		{
-			id: 1,
-			title: 'todo1',
-			body: 'mustdothis',
-			checked: false
-		},
-		{
-			id: 2,
-			title: 'todo2',
-			body: 'mustdothis2',
-			checked: true
-		},
-		{
-			id: 3,
-			title: 'todo3',
-			body: 'mustdothis3',
-			checked: false
-		},
-		{
-			id: 4,
-			title: 'todo4',
-			body: 'mustdothis4',
-			checked: false
-		}
-	])
 
 	const toggleShowAddTask = () => {
 		setShowAddTask(!showAddTask)
 	}
 
-	const addTask = (task) => {
-		task.id = tasks.length + 1
-		setTasks([...tasks, task])
+	const addTask = async (task) => {
+		// task.id = tasks.length + 1
+		// getData()
 		console.log(task)
 		console.log(tasks)
+
+
+
+		fetch('/tasks', {
+			method: 'POST',
+			cors: 'same-origin',
+			headers: {
+				'Origin': `/`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(task)
+		}).then(res => {
+			res.text()
+		}).then(result => {
+			console.log(result)
+			setTasks([...tasks, task])
+			setRender(!render)
+		}).catch(err => {
+			console.log(err)
+		})
+
+
+
+
+
 	}
 	//deletes the task
 	const deleteTask = (id) => {
