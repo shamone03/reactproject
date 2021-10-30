@@ -86,9 +86,10 @@ function App() {
 	const taskToggleCheckbox = (id) => {
 		let arr = [...tasks]
 		let obj = tasks.find((task) => {
-			return task.id === id
+			// task._id === id ? console.log(task) : ''
+			return task._id === id
 		})
-		arr[tasks.indexOf(obj)].checked = !arr[tasks.indexOf(obj)].checked
+		arr[tasks.indexOf(obj)].done = !arr[tasks.indexOf(obj)].done
 		setTasks(arr)
 	}
 

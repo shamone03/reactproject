@@ -1,3 +1,5 @@
+const { response } = require("express")
+
 const model = require("../models/model")
 
 exports.getTasks = (req, res) => {
@@ -33,10 +35,20 @@ exports.addTask = async (req, res) => {
     newTask.save().then(data => {
         console.log('success', data)
         res.status(200).send({message:'success'})
-        res.
+        
     }).catch(err => {
         console.log(err)
         res.status(500).send({message:'success'})
+        
     })
+    
+}
+
+exports.deleteTask = (req, res) => {
+    res.header("Access-Control-Allow-Origin", `/`)
+
+    model.tasksDB.findByIdAndDelete(req.body._id).then((data) => {
+        console.log(data)
+    }).catch(err => console.log(err))
 
 }
