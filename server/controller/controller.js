@@ -35,20 +35,23 @@ exports.addTask = async (req, res) => {
     newTask.save().then(data => {
         console.log('success', data)
         res.status(200).send({message:'success'})
-        
+
     }).catch(err => {
         console.log(err)
-        res.status(500).send({message:'success'})
-        
+        res.status(500).send({message:'fail'})
+
     })
     
 }
 
 exports.deleteTask = (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
-
+    console.log(req)
+    console.log(req.body)
+    console.log(req.body._id)
     model.tasksDB.findByIdAndDelete(req.body._id).then((data) => {
         console.log(data)
+        res.status(200).send({message:'success'})
     }).catch(err => console.log(err))
 
 }
