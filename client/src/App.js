@@ -79,7 +79,7 @@ function App() {
 	const deleteTask = (id) => {
 		console.log('delete ', id)
 		setTasks(tasks.filter((task) => {
-			return task.id !== id
+			return task._id !== id
 		}))
 	}
 
