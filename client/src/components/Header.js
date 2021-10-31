@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import Button from './Button'
 
-const Header = ({ toggleShowAddTask, showAddTask }) => {
+const Header = ({toggleShowAddTask, showAddTask}) => {
     const onClick = () => {
         toggleShowAddTask()
     }
@@ -9,7 +9,7 @@ const Header = ({ toggleShowAddTask, showAddTask }) => {
     return (
         <header className='header'>
 
-             {/*<h1 style={headingStyle}> task tracker {props.title}</h1>*/}
+            {/*<h1 style={headingStyle}> task tracker {props.title}</h1>*/}
             <h1>task tracker</h1>
             <Button color={!showAddTask ? 'green' : 'red'} text={!showAddTask ? 'Add' : 'Close'} onClick={onClick}/>
 

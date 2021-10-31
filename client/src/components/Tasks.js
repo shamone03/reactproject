@@ -2,7 +2,7 @@ import Task from './Task'
 // import PropTypes from 'prop-types'
 
 //to display everything in the list
-const Tasks = ({ tasks, onDelete, toggleCheck }) => {
+const Tasks = ({tasks, onDelete, toggleCheck}) => {
 
     return (
         <>

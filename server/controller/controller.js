@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 const model = require("../models/model")
 
 exports.getTasks = (req, res) => {
@@ -34,14 +32,14 @@ exports.addTask = async (req, res) => {
 
     newTask.save().then(data => {
         console.log('success', data)
-        res.status(200).send({message:'success'})
+        res.status(200).send({message: 'success'})
 
     }).catch(err => {
         console.log(err)
-        res.status(500).send({message:'fail'})
+        res.status(500).send({message: 'fail'})
 
     })
-    
+
 }
 
 exports.deleteTask = (request, res) => {
@@ -51,7 +49,7 @@ exports.deleteTask = (request, res) => {
     // console.log(req.body._id)
     model.tasksDB.findByIdAndDelete(request.body._id).then((data) => {
         console.log(data)
-        res.status(200).send({message:'success'})
+        res.status(200).send({message: 'success'})
     }).catch(err => console.log(err))
 
 }

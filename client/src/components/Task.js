@@ -1,6 +1,7 @@
-import { FaTimes } from 'react-icons/fa'
+import {FaTimes} from 'react-icons/fa'
 import CheckButton from './CheckButton'
-const Task = ({ task, onDelete, toggleCheck }) => {
+
+const Task = ({task, onDelete, toggleCheck}) => {
     return (
         <div className={"task"}>
             {/*need to create arrow func because only function ref was passed down*/}
