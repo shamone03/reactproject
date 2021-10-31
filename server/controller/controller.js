@@ -44,12 +44,12 @@ exports.addTask = async (req, res) => {
     
 }
 
-exports.deleteTask = (req, res) => {
+exports.deleteTask = (request, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
-    console.log(req)
-    console.log(req.body)
-    console.log(req.body._id)
-    model.tasksDB.findByIdAndDelete(req.body._id).then((data) => {
+    // console.log(req)
+    console.log(request.body)
+    // console.log(req.body._id)
+    model.tasksDB.findByIdAndDelete(request.body._id).then((data) => {
         console.log(data)
         res.status(200).send({message:'success'})
     }).catch(err => console.log(err))

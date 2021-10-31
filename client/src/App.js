@@ -61,7 +61,7 @@ function App() {
 			},
 			body: JSON.stringify(task)
 		}).then(res => {
-			res.text()
+			res.json()
 		}).then(result => {
 			console.log(result)
 			setTasks([...tasks, task])
@@ -76,8 +76,24 @@ function App() {
 
 	}
 	//deletes the task
-	const deleteTask = (id) => {
-		console.log('delete ', id)
+	const deleteTask = async (id) => {
+
+		fetch('/tasks', {
+			method: 'DELETE',
+			cors: 'same-origin',
+			headers: {
+				'Origin': `/`,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({_id: id})
+		}).then(res => {
+			res.json()
+		}).then(data => {
+			console.log(data)
+			setRender(!render)
+		})
+
+		console.log('deleted ', id)
 		setTasks(tasks.filter((task) => {
 			return task._id !== id
 		}))
