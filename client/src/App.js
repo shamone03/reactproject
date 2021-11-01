@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from "./components/AddTask"
 import Button from "./components/Button"
-import {addTaskController} from "./controllers/controller"
+import {addTaskController, deleteTaskController, getTasksController} from "./controllers/controller"
 
 require('dotenv').config()
 
@@ -17,94 +17,33 @@ function App() {
     const [render, setRender] = useState(false)
 
     useEffect(async () => {
-        const getData = async () => {
-            try {
-
-                const res = await fetch(`/tasks`, {
-                    method: 'GET',
-                    cors: 'same-origin',
-                    headers: {
-                        'Origin': `/`,
-                        'Content-Type': 'application/json'
-                    }
-                })
-                const data = await res.json()
-                console.log(data)
-                setTasks([...data])
-            } catch (e) {
-                console.log('json error')
-                console.log(e)
-            }
-        }
-
-        await getData()
+        const data = await getTasksController()
+        setTasks(data)
     }, [render])
 
     const toggleShowAddTask = () => setShowAddTask(!showAddTask)
 
     const addTask = async (task) => {
         console.log(tasks)
-        let addTask = await addTaskController(task)
-        console.log('addTaskController', addTask)
-        if (addTask === true) {
-        	setTasks([...tasks, task])
-        	setRender(!render)
-            console.log('rendered')
-        } else {
-            console.log('did not render')
+        if (await addTaskController(task) === true) {
+            setTasks([...tasks, task])
+            setRender(!render)
         }
-
-
-        // fetch('/tasks', {
-        //     method: 'POST',
-        //     cors: 'same-origin',
-        //     headers: {
-        //         'Origin': `/`,
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(task)
-        // }).then(res => {
-        //     res.json()
-        //     console.log(res.status)
-        // }).then(data => {
-        //     console.log(data.statusCode)
-        //     console.log(data.message)
-        //     setTasks([...tasks, task])
-        //     setRender(!render)
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-
     }
 
-    //deletes the task
     const deleteTask = async (id) => {
 
-        fetch('/tasks', {
-            method: 'DELETE',
-            cors: 'same-origin',
-            headers: {
-                'Origin': `/`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({_id: id})
-        }).then(res => {
-            res.json()
-        }).then(data => {
-            console.log(data)
+        console.log(tasks)
+        if (await deleteTaskController(id)) {
             setRender(!render)
-        })
+            console.log('deleted ', id)
+        }
 
-        console.log('deleted ', id)
-        setTasks(tasks.filter((task) => {
-            return task._id !== id
-        }))
     }
 
     const taskToggleCheckbox = (id) => {
         let arr = [...tasks]
         let obj = tasks.find((task) => {
-            // task._id === id ? console.log(task) : ''
             return task._id === id
         })
         arr[tasks.indexOf(obj)].done = !arr[tasks.indexOf(obj)].done
@@ -113,12 +52,10 @@ function App() {
 
     return (
         <div className="container">
+
             <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
-            {/*{<AddTask onAdd={addTask}/>}*/}
             {showAddTask ? (<AddTask onAdd={addTask}/>) : ''}
-            {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (
-                <p>No tasks</p>)}
-            {/*{getData()}*/}
+            {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (<p>No tasks</p>)}
             <Button onClick={() => console.log('clicked')}/>
 
         </div>

@@ -8,12 +8,7 @@ exports.getTasks = (req, res) => {
     }).catch(err => {
         console.log(err)
     })
-    // JSON.stringify(tasksList)
-    // console.log('server', tasksList)
-    //
-    // res.send(tasksList.map((task) => {
-    //     return JSON.stringify(task)
-    // }).join(''))
+
 }
 
 exports.addTask = async (req, res) => {
@@ -42,14 +37,23 @@ exports.addTask = async (req, res) => {
 
 }
 
-exports.deleteTask = (request, res) => {
+exports.deleteTask = (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
     // console.log(req)
-    console.log(request.body)
+    console.log(req.body)
     // console.log(req.body._id)
-    model.tasksDB.findByIdAndDelete(request.body._id).then((data) => {
+    model.tasksDB.findByIdAndDelete(req.body._id).then((data) => {
         console.log(data)
         res.status(200).send({message: 'success'})
-    }).catch(err => console.log(err))
+    }).catch(err => {
+        res.status(500).send({message: 'fail'})
+        console.log(err)
+    })
 
+}
+
+exports.updateTask = async (req, res) => {
+    res.header("Access-Control-Allow-Origin", `/`)
+
+    const data = await model.tasksDB.findByIdAndUpdate(req.body._id)
 }

@@ -1,27 +1,4 @@
 const addTaskController = async (task) => {
-    // let status
-    // fetch('/tasks', {
-    //     method: 'POST',
-    //     cors: 'same-origin',
-    //     headers: {
-    //         'Origin': `/`,
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(task)
-    // }).then(res => {
-    //     res.json()
-    //     console.log(res.status)
-    //     status = res.status
-    // }).then(data => {
-    //     // console.log('data: ', data.message)
-    //
-    //     // setTasks([...tasks, task])
-    //     // setRender(!render)
-    // }).catch(err => {
-    //     console.log('error in controller: ', err)
-    // })
-    // console.log('status', status)
-    // return status === 200
     const res = await fetch('/tasks', {
         method: 'POST',
         cors: 'same-origin',
@@ -35,17 +12,36 @@ const addTaskController = async (task) => {
     // const data = await res.json()
 }
 
-const updateTaskController = async (task) => {
-    fetch('/tasks', {
-        method: 'PUT',
+const deleteTaskController = async (id) => {
+    const res = await fetch('/tasks', {
+        method: 'DELETE',
         cors: 'same-origin',
         headers: {
-            'Origin': '/',
-            'Content-type': 'application/json'
+            'Origin': `/`,
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(task)
+        body: JSON.stringify({_id: id})
     })
+
+    return res.status === 200
 
 }
 
-export {addTaskController}
+const getTasksController = async () => {
+
+    const res = await fetch(`/tasks`, {
+        method: 'GET',
+        cors: 'same-origin',
+        headers: {
+            'Origin': `/`,
+            'Content-Type': 'application/json'
+        }
+    })
+    return await res.json()
+}
+
+const taskToggleController = async () => {
+
+}
+
+export {addTaskController, deleteTaskController, getTasksController}
