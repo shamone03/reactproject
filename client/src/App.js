@@ -44,30 +44,36 @@ function App() {
 
     const addTask = async (task) => {
         console.log(tasks)
-        console.log(await addTaskController(task))
-        // if (await addTaskController(task) === true) {
-        // 	setTasks([...tasks, task])
-        // 	setRender(!render)
-        // }
+        let addTask = await addTaskController(task)
+        console.log('addTaskController', addTask)
+        if (addTask === true) {
+        	setTasks([...tasks, task])
+        	setRender(!render)
+            console.log('rendered')
+        } else {
+            console.log('did not render')
+        }
 
 
-        fetch('/tasks', {
-            method: 'POST',
-            cors: 'same-origin',
-            headers: {
-                'Origin': `/`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        }).then(res => {
-            res.json()
-        }).then(result => {
-            console.log(result)
-            setTasks([...tasks, task])
-            setRender(!render)
-        }).catch(err => {
-            console.log(err)
-        })
+        // fetch('/tasks', {
+        //     method: 'POST',
+        //     cors: 'same-origin',
+        //     headers: {
+        //         'Origin': `/`,
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(task)
+        // }).then(res => {
+        //     res.json()
+        //     console.log(res.status)
+        // }).then(data => {
+        //     console.log(data.statusCode)
+        //     console.log(data.message)
+        //     setTasks([...tasks, task])
+        //     setRender(!render)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
 
     }
 
