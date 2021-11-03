@@ -4,9 +4,12 @@ const router = express.Router()
 // const model = require("../models/model")
 const {getTasks, addTask, deleteTask, updateTask} = require("../controller/controller")
 
-router.get('/tasks', getTasks)
-router.post('/tasks', addTask)
-router.delete("/tasks", deleteTask)
-router.put('/tasks', updateTask)
+router.get('/api/tasks', getTasks)
+router.post('/api/tasks', addTask)
+router.delete("/api/tasks", deleteTask)
+router.put('/api/tasks', updateTask)
+// router.get('/register', (req, res) => {
+//     res.send({message:'hello'})
+// })
 
 module.exports = router

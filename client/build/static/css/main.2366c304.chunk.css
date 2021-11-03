@@ -1,0 +1,2 @@
+#tasks{display:grid;grid-auto-columns:1fr;grid-auto-rows:1fr;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr 1fr;grid-gap:2.5% 2.5%;gap:2.5% 2.5%;grid-template-areas:". . ." ". . ." ". . .";justify-content:stretch;align-content:stretch;justify-items:center;align-items:stretch;width:80%;height:80%}h3{display:flex;flex-direction:row;justify-content:space-between}
+/*# sourceMappingURL=main.2366c304.chunk.css.map */

@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react"
-import './index.css'
+import {Route, StaticRouter, Switch} from "react-router-dom"
+// import './index.css'
+import './index2.css'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from "./components/AddTask"
-import Button from "./components/Button"
+import Register from './components/Register'
 import {addTaskController, deleteTaskController, getTasksController} from "./controllers/controller"
 
 require('dotenv').config()
@@ -51,16 +53,20 @@ function App() {
     }
 
     return (
-        <div className="container">
+        <StaticRouter>
+            <div className="container">
+                <Switch>
+                    <Route path={'/register'} component={Register}/>
+                </Switch>
+                <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
+                {showAddTask ? (<AddTask onAdd={addTask}/>) : ''}
+                {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (
+                    <p>No tasks</p>)}
 
-            <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
-            {showAddTask ? (<AddTask onAdd={addTask}/>) : ''}
-            {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (<p>No tasks</p>)}
-            <Button onClick={() => console.log('clicked')}/>
-
-        </div>
+            </div>
+        </StaticRouter>
 
     )
 }
 
-export default App;
+export default App

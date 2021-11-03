@@ -5,9 +5,9 @@ import Task from './Task'
 const Tasks = ({tasks, onDelete, toggleCheck}) => {
 
     return (
-        <>
+        <div id={"tasks"}>
             {tasks.map((task) => (<Task key={task._id} task={task} onDelete={onDelete} toggleCheck={toggleCheck}/>))}
-        </>
+        </div>
     )
 
 }
