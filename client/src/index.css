@@ -116,3 +116,22 @@ footer {
     margin-top: 30px;
     text-align: center;
 }
+
+#navBar {
+    display: flex;
+    flex-direction: row;
+
+}
+
+#homeLink {
+    flex-basis: 80%;
+}
+
+#loginLink, #registerLink {
+    margin: 0 2px 0 2px;
+    flex-basis: 10%;
+}
+
+.listElement {
+    list-style: none;
+}
