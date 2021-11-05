@@ -12,6 +12,6 @@ router.delete("/api/tasks", deleteTask)
 router.put('/api/tasks', updateTask)
 
 router.post('/api/users', addUser)
-router.get('/api/checkPassword', checkPassword)
+router.post('/api/checkPassword', checkPassword)
 
 module.exports = router

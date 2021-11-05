@@ -1,5 +1,6 @@
 const model = require('../models/model')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 exports.addUser = async (req, res) => {
     if (!req.body) {
         res.status(500).send({message: 'no body'})
@@ -30,7 +31,8 @@ exports.checkPassword = async (req, res) => {
     } else {
         if (await bcrypt.compare(req.body.password, user.password)) {
             console.log('password correct')
-            res.status(200).send({message: 'success'})
+            const token = jwt.sign({username: user.username, _id: user._id}, process.env.JWT_SECRET)
+            res.status(200).send({message: 'success', token: token})
         } else {
             console.log('password incorrect')
             res.status(500).send({message: 'password incorrect'})
@@ -38,4 +40,3 @@ exports.checkPassword = async (req, res) => {
     }
 
 }
-

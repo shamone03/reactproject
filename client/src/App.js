@@ -1,7 +1,7 @@
-import {HashRouter, Link, Route, Switch} from "react-router-dom"
+import {HashRouter, Link, Route, StaticRouter, Switch} from 'react-router-dom'
 import Home from './components/Home'
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Register from './components/Register'
+import Login from './components/Login'
 
 function App() {
     return (
