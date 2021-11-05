@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 
 import {addUserController} from "../controllers/userController";
+
 function Register() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -17,7 +18,6 @@ function Register() {
             <h1>
                 Register
             </h1>
-
 
 
             <form className={'add-form'} onSubmit={addTask}>
