@@ -5,6 +5,7 @@ import Header from './Header'
 import Tasks from './Tasks'
 import AddTask from './AddTask'
 import {addTaskController, deleteTaskController, getTasksController} from '../controllers/controller'
+import jwt from 'jsonwebtoken'
 
 require('dotenv').config()
 
@@ -15,10 +16,15 @@ function Home() {
     const [tasks, setTasks] = useState([])
     //variable to update the DOM, sometimes does it twice, too bad
     const [render, setRender] = useState(false)
+    // const [username, setUsername] = useState('')
+    // const username = jwt.decode(localStorage.getItem('token')).username
+
 
     useEffect(async () => {
         const data = await getTasksController()
         setTasks(data)
+
+        // setUsername(jwt.decode(localStorage.getItem('token')).username)
     }, [render])
 
     const toggleShowAddTask = () => setShowAddTask(!showAddTask)
@@ -53,7 +59,7 @@ function Home() {
     return (
 
         <div className="container">
-
+            {localStorage.hasOwnProperty('token') ? (<h1>{jwt.decode(localStorage.getItem('token')).username}</h1>) : (<p>not logged in</p>)}
             <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
             {showAddTask ? (<AddTask onAdd={addTask}/>) : ''}
             {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (

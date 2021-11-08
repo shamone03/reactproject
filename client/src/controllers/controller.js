@@ -1,10 +1,14 @@
 const addTaskController = async (task) => {
-    const res = await fetch('/api/tasks', {
-        method: 'POST',
+    if (!localStorage.hasOwnProperty('token')) {
+        return false
+    }
+    const res = await fetch('/api/tasks/add', {
+        method: 'PUT',
         cors: 'same-origin',
         headers: {
             'Origin': `/`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify(task)
     })
@@ -13,6 +17,9 @@ const addTaskController = async (task) => {
 }
 
 const deleteTaskController = async (id) => {
+    if (!localStorage.hasOwnProperty('token')) {
+        return false
+    }
     const res = await fetch('/api/tasks', {
         method: 'DELETE',
         cors: 'same-origin',
@@ -28,19 +35,25 @@ const deleteTaskController = async (id) => {
 }
 
 const getTasksController = async () => {
-
+    if (!localStorage.hasOwnProperty('token')) {
+        return false
+    }
     const res = await fetch(`/api/tasks`, {
         method: 'GET',
         cors: 'same-origin',
         headers: {
             'Origin': `/`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         }
     })
     return await res.json()
 }
 
 const taskToggleController = async (id) => {
+    if (!localStorage.hasOwnProperty('token')) {
+        return false
+    }
     const res = await fetch('/api/tasks', {
         method: 'PUT',
         cors: 'same-origin',

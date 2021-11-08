@@ -11,14 +11,20 @@ exports.addUser = async (req, res) => {
         password: await bcrypt.hash(req.body.password, 10)
     })
 
-    newUser.save().then((data) => {
+    const newTaskDoc = model.tasksDB({
+        username: req.body.username,
+        tasks: []
+    })
+
+    newUser.save().then(async (data) => {
+        await newTaskDoc.save()
         res.status(200).send({message: 'success'})
         console.log(data)
     }).catch(err => res.status(500).send(err))
 
 }
 
-exports.checkPassword = async (req, res) => {
+exports.loginUser = async (req, res) => {
     if (!req.body) {
         res.status(500).send({message: 'no body'})
     }
@@ -31,7 +37,10 @@ exports.checkPassword = async (req, res) => {
     } else {
         if (await bcrypt.compare(req.body.password, user.password)) {
             console.log('password correct')
-            const token = jwt.sign({username: user.username, _id: user._id}, process.env.JWT_SECRET)
+            const token = jwt.sign({username: user.username, _id: user._id}, process.env.JWT_SECRET, {
+                expiresIn: 60 * 60 * 24
+            })
+
             res.status(200).send({message: 'success', token: token})
         } else {
             console.log('password incorrect')

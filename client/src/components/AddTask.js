@@ -11,6 +11,7 @@ const AddTask = ({onAdd}) => {
         e.preventDefault()
         if (!title) {
             alert('Enter a title')
+
             return
         }
         onAdd({title, body, done})
