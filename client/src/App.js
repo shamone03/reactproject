@@ -1,4 +1,7 @@
 import {HashRouter, Link, Route, Switch} from 'react-router-dom'
+import './index.css'
+// import './index2.css'
+
 import Home from './components/Home'
 import Register from './components/Register'
 import Login from './components/Login'

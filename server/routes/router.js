@@ -4,7 +4,7 @@ const router = express.Router()
 // const controller = require('../controller/controller')
 // const model = require("../models/model")
 const {getTasks, addTask, deleteTask, updateTask} = require("../controller/taskController")
-const {addUser, loginUser} = require("../controller/userController")
+const {addUser, loginUser, verifyUser} = require("../controller/userController")
 
 const verifyToken = (req, res, next) => {
     console.log(req.headers)
@@ -32,7 +32,7 @@ router.delete("/api/tasks", deleteTask)
 
 router.put('/api/tasks', updateTask)
 
-
+router.get('/api/verify', verifyUser)
 router.post('/api/users', addUser)
 router.post('/api/login', loginUser)
 

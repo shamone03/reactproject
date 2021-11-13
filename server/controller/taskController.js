@@ -53,10 +53,10 @@ exports.updateTask = async (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
     const token = req.headers['authorization']
 
-    if (await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, {$set: {tasks: {_id: req.body._id}}})) {
-        res.status(200).send()
-    }
-    model.tasksDB.update()
+    // if (await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, {$set: {tasks: {_id: req.body._id}}})) {
+    //     res.status(200).send()
+    // }
+    // model.tasksDB.update()
 
 
 }

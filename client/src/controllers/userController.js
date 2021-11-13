@@ -31,4 +31,18 @@ const loginUser = async (username, password) => {
     }
 }
 
-export {addUserController, loginUser}
+const verifyUser = async () => {
+    const res = await fetch('/api/verify', {
+        method: 'GET',
+        cors: 'same-origin',
+        headers: {
+            'Origin': `/`,
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        }
+    })
+
+    return res.status === 200
+}
+
+export {addUserController, loginUser, verifyUser}

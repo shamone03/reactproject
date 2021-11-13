@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react'
-import '../index.css'
 // import './index2.css'
 import Header from './Header'
 import Tasks from './Tasks'
@@ -11,6 +10,9 @@ import {
     taskToggleController
 } from '../controllers/controller'
 import jwt from 'jsonwebtoken'
+import {Redirect} from "react-router-dom";
+import {verifyUser} from "../controllers/userController";
+import {use} from "bcrypt/promises";
 
 require('dotenv').config()
 
@@ -21,12 +23,14 @@ function Home() {
     const [tasks, setTasks] = useState([])
     //variable to update the DOM, sometimes does it twice, too bad
     const [render, setRender] = useState(false)
+    const [verified, setVerified] = useState(false)
     // const [username, setUsername] = useState('')
     // const username = jwt.decode(localStorage.getItem('token')).username
 
 
     useEffect(async () => {
         const data = await getTasksController()
+        setVerified(await protectComponent())
         setTasks(data)
 
         // setUsername(jwt.decode(localStorage.getItem('token')).username)
@@ -62,17 +66,26 @@ function Home() {
         setTasks(arr)
     }
 
+    const protectComponent = async () => {
+        if (!localStorage.hasOwnProperty('token')) {
+            return true
+        }
+        return !(await verifyUser())
+
+    }
+
     return (
 
         <div className="container">
-            {localStorage.hasOwnProperty('token') ? (<h1>{jwt.decode(localStorage.getItem('token')).username}</h1>) : (<p>not logged in</p>)}
+            {verified ? (<Redirect to={'/login'}/>) : ''}
+            {localStorage.hasOwnProperty('token') ? (<h1>{jwt.decode(localStorage.getItem('token')).username}</h1>) : (
+                <p>not logged in</p>)}
             <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
             {showAddTask ? (<AddTask onAdd={addTask}/>) : ''}
             {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} toggleCheck={taskToggleCheckbox}/>) : (
                 <p>No tasks</p>)}
 
         </div>
-
 
     )
 }

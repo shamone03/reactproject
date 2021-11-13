@@ -49,3 +49,19 @@ exports.loginUser = async (req, res) => {
     }
 
 }
+
+exports.verifyUser = (req, res) => {
+    console.log(req.headers)
+    console.log('token: ' + req.headers['authorization'])
+    if (!req.headers['authorization']) {
+        res.send({message: 'no token found'})
+        return
+    }
+    try {
+        jwt.verify(req.headers['authorization'], process.env.JWT_SECRET)
+        res.status(200).send()
+    } catch (err) {
+        console.log(err)
+        res.send({message: 'invalid token'})
+    }
+}
