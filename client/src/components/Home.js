@@ -4,7 +4,12 @@ import '../index.css'
 import Header from './Header'
 import Tasks from './Tasks'
 import AddTask from './AddTask'
-import {addTaskController, deleteTaskController, getTasksController} from '../controllers/controller'
+import {
+    addTaskController,
+    deleteTaskController,
+    getTasksController,
+    taskToggleController
+} from '../controllers/controller'
 import jwt from 'jsonwebtoken'
 
 require('dotenv').config()
@@ -47,11 +52,12 @@ function Home() {
 
     }
 
-    const taskToggleCheckbox = (id) => {
+    const taskToggleCheckbox = async (id) => {
         let arr = [...tasks]
         let obj = tasks.find((task) => {
             return task._id === id
         })
+        await taskToggleController(id, !arr[tasks.indexOf(obj)].done)
         arr[tasks.indexOf(obj)].done = !arr[tasks.indexOf(obj)].done
         setTasks(arr)
     }

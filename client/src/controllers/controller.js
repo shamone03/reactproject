@@ -25,7 +25,8 @@ const deleteTaskController = async (id) => {
         cors: 'same-origin',
         headers: {
             'Origin': `/`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
         },
         body: JSON.stringify({_id: id})
     })
@@ -50,7 +51,7 @@ const getTasksController = async () => {
     return await res.json()
 }
 
-const taskToggleController = async (id) => {
+const taskToggleController = async (id, done) => {
     if (!localStorage.hasOwnProperty('token')) {
         return false
     }
@@ -61,8 +62,10 @@ const taskToggleController = async (id) => {
             'Origin': '/',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({_id: id})
+        body: JSON.stringify({_id: id, done: done})
     })
+
+    return res.status === 200
     
 }
 

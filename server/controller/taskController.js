@@ -4,13 +4,7 @@ const jwt = require('jsonwebtoken')
 exports.getTasks = (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
     const token = req.headers['authorization']
-    // console.log(token)
-    // console.log(jwt.verify(token, process.env.JWT_SECRET))
-    // model.tasksDB.find().then((tasks) => {
-    //     res.send(tasks)
-    // }).catch(err => {
-    //     console.log(err)
-    // })
+
     const username = jwt.decode(token).username
     console.log(username)
     model.tasksDB.findOne({username: username}).then((data) => {
@@ -26,8 +20,7 @@ exports.addTask = async (req, res) => {
 
     res.header("Access-Control-Allow-Origin", `/`)
     const token = req.headers['authorization']
-    // console.log(token)
-    // console.log(jwt.verify(token, process.env.JWT_SECRET))
+
     if (!req.body) {
         console.log('no body')
     }
@@ -39,37 +32,31 @@ exports.addTask = async (req, res) => {
         done: req.body.done
     }
 
-    console.log('updated: ' + await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, { $push: {tasks: newTask}}))
-    res.status(200).send()
-    // newTask.save().then(data => {
-    //     console.log('success', data)
-    //     res.status(200).send({message: 'success'})
-    //
-    // }).catch(err => {
-    //     console.log(err)
-    //     res.status(500).send({message: 'fail'})
-    //
-    // })
+    if (await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, {$push: {tasks: newTask}}, {new: true})) {
+        res.status(200).send()
+    }
 
 }
 
-exports.deleteTask = (req, res) => {
+exports.deleteTask = async (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
-    // console.log(req)
     console.log(req.body)
-    // console.log(req.body._id)
-    model.tasksDB.findByIdAndDelete(req.body._id).then((data) => {
-        console.log(data)
-        res.status(200).send({message: 'success'})
-    }).catch(err => {
-        res.status(500).send({message: 'fail'})
-        console.log(err)
-    })
 
+    const token = req.headers['authorization']
+
+    if (await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, {$pull: {tasks: {_id: req.body._id}}})) {
+        res.status(200).send()
+    }
 }
 
 exports.updateTask = async (req, res) => {
     res.header("Access-Control-Allow-Origin", `/`)
+    const token = req.headers['authorization']
 
-    const data = await model.tasksDB.findByIdAndUpdate(req.body._id)
+    if (await model.tasksDB.findOneAndUpdate({username: jwt.decode(token).username}, {$set: {tasks: {_id: req.body._id}}})) {
+        res.status(200).send()
+    }
+    model.tasksDB.update()
+
+
 }
