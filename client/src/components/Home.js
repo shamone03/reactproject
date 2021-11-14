@@ -12,7 +12,6 @@ import {
 import jwt from 'jsonwebtoken'
 import {Redirect} from "react-router-dom";
 import {verifyUser} from "../controllers/userController";
-import {use} from "bcrypt/promises";
 
 require('dotenv').config()
 
@@ -28,10 +27,13 @@ function Home() {
     // const username = jwt.decode(localStorage.getItem('token')).username
 
 
-    useEffect(async () => {
-        const data = await getTasksController()
-        setVerified(await protectComponent())
-        setTasks(data)
+    useEffect(() => {
+        const fetchData = async () => {
+            setTasks(await getTasksController())
+            setVerified(await protectComponent())
+        }
+        fetchData()
+        
 
         // setUsername(jwt.decode(localStorage.getItem('token')).username)
     }, [render])

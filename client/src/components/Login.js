@@ -1,11 +1,19 @@
 import {useState} from 'react'
 import {loginUser} from '../controllers/userController'
 
-function Login() {
+function Login(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const login = async () => {
-        console.log(await loginUser(username, password))
+        const result = await loginUser(username, password)
+        if (result.success) {
+
+            console.log(props.history)
+            props.history.push('/')
+            // alert('logged in')
+        } else {
+            alert('no user found')
+        }
     }
     return (
         <>
@@ -17,7 +25,7 @@ function Login() {
                 </div>
                 <div className="form-control">
                     <label htmlFor="">Password</label>
-                    <input type="text" placeholder={'password'} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" placeholder={'password'} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
                 <input type="submit" name="" className="btn btn-block" value={'Login'}/>

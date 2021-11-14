@@ -25,9 +25,9 @@ const loginUser = async (username, password) => {
     if (res.status === 200) {
         const data = await res.json()
         localStorage.setItem("token", data.token)
-        return data.token
+        return {success: true, token: data.token}
     } else {
-        return 'error'
+        return {success: false}
     }
 }
 
