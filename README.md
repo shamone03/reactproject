@@ -1,3 +1,3 @@
 # task tracker
-##login and add/delete your tasks
+## login and add/delete your tasks
 thats it
