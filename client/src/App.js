@@ -1,6 +1,7 @@
 import {HashRouter, Link, Route, Switch} from 'react-router-dom'
-import './index.css'
-// import './index2.css'
+// import './index.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import './index2.css'
 import Home from './components/Home'
 import Register from './components/Register'
 import Login from './components/Login'
@@ -10,15 +11,12 @@ function App() {
     return (
         <HashRouter>
             <div className={'App'}>
-                <nav id={'navBar'}>
-                    <li className={'listElement'} id={'homeLink'}><Link to={'/'}>Home</Link></li>
-                    <li className={'listElement'} id={'registerLink'}><Link to={'/register'}>Register</Link></li>
-                    {
-                        localStorage.hasOwnProperty('token') ?
-                        (<li className={'listElement'} id={'loginLink'} onClick={() => localStorage.clear()}><Link to={'/login'}>Logout</Link></li>) :
-                        (<li className={'listElement'} id={'loginLink'}><Link to={'/login'}>Login</Link></li>)
-                    }
-
+                <nav className={'nav nav-pills nav-fill'}>
+                    <Link className={'nav-link nav-item'} to={'/register'}>Register</Link>
+                    <Link className={'nav-link nav-item'} to={'/'}>Home</Link>        
+                    <Link className={'nav-link nav-item'} to={'/login'} onClick={() => localStorage.clear()}>Logout</Link>
+                    
+                
                 </nav>
                 <Switch>
                     <Route exact path={'/'} component={Home}/>

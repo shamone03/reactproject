@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {loginUser} from '../controllers/userController'
+import '../loginstyles.css'
 
 function Login(props) {
     const [username, setUsername] = useState('')
@@ -16,21 +17,21 @@ function Login(props) {
         }
     }
     return (
-        <>
-            <h1>Login</h1>
-            <form className={'add-form'} onSubmit={login}>
-                <div className="form-control">
-                    <label htmlFor="">Username</label>
-                    <input type="text" placeholder={'username'} onChange={(e) => setUsername(e.target.value)}/>
+        <div id={'login'}>
+            <form id={'login-form'} onSubmit={login}>
+                <h1 class={'text-center'} id={'login-heading'}>Login</h1>
+                <div className="form-group">
+                    <small htmlFor="">Username</small>
+                    <input type="text" className={'form-control'} onChange={(e) => setUsername(e.target.value)}/>
                 </div>
-                <div className="form-control">
-                    <label htmlFor="">Password</label>
-                    <input type="password" placeholder={'password'} onChange={(e) => setPassword(e.target.value)}/>
+                <div className="form-group">
+                    <small htmlFor="">Password</small>
+                    <input type="password" className={'form-control'} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
 
-                <input type="submit" name="" className="btn btn-block" value={'Login'}/>
+                <input type="submit" name="" className="btn btn-outline-dark submit-btn" value={'Login'}/>
             </form>
-        </>
+        </div>
     )
 }
 

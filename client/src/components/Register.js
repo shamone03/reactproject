@@ -1,6 +1,6 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 
-import {addUserController} from "../controllers/userController";
+import { addUserController } from "../controllers/userController";
 
 function Register() {
     const [username, setUsername] = useState('')
@@ -15,22 +15,21 @@ function Register() {
     return (
 
         <>
-            <h1>
-                Register
-            </h1>
+
 
 
             <form className={'add-form'} onSubmit={addTask}>
+                <h1>Register</h1>
                 <div className="form-control">
-                    <label htmlFor="">Username</label>
-                    <input type="text" placeholder={'username'} onChange={(e) => setUsername(e.target.value)}/>
+                    <small>Username</small>
+                    <input type="text" placeholder={'username'} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="form-control">
-                    <label htmlFor="">Password</label>
-                    <input type="text" placeholder={'password'} onChange={(e) => setPassword(e.target.value)}/>
+                    <small>Password</small>
+                    <input type="text" placeholder={'password'} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
-                <input type="submit" name="" className="btn btn-block" value={'Register'}/>
+                <input type="submit" name="" className="btn btn-block" value={'Register'} />
             </form>
         </>
     )

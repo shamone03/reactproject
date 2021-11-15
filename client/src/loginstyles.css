@@ -1,0 +1,76 @@
+#login-form , #add-form {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: center;
+    height: 275px;
+    justify-content: space-around;
+}
+
+#login {
+    width: 300px;
+    margin: 50px auto;
+    background-color: #161b22;
+    height: 300px;
+    border-radius: 15px;
+}
+
+.submit-btn {
+    border-radius: 8px;
+    font-family: Arial;
+    color: #fff;
+    /* font-size: 20px; */
+    background: #482049;
+    /* padding: 10px 20px; */
+    text-decoration: none;
+    transition: all .15s ease-in-out;
+    height: 38px;
+    width: 30%;
+}
+
+.submit-btn:hover {
+    width: 35%;
+    background: #211533;
+    text-decoration: none;
+}
+
+#login-heading {
+    color: darkslategrey;
+    text-decoration: none;
+}
+
+.form-control {
+    background-color: #0d1117;
+    border-color: black;
+    transition: all .15s ease-in-out;
+    color: aliceblue;
+}
+
+.form-control:focus {
+    background-color: #0d1117;
+    border-color: darkslategrey;
+    box-shadow: 0px 0px 4px 0.25rem darkslategrey;
+    color: aliceblue;
+
+}
+
+small {
+    color: darkcyan;
+}
+
+/* #submit {
+    width: inherit;
+    transition: width ease-in-out 1s;
+}
+
+#submit:hover {
+} */
+/* 
+.btn {
+    transition: width 1s ease-in-out;
+}
+
+.btn:hover {
+    width: 25%;
+    
+} */

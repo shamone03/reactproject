@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const addUserController = async (username, password) => {
     const res = await fetch('/api/users', {
         method: 'POST',
@@ -13,7 +15,8 @@ const addUserController = async (username, password) => {
 
 //logs in user, stores token in localStorage
 const loginUser = async (username, password) => {
-    const res = await fetch('/api/login', {
+    
+    const res = await fetch(`/api/login`, {
         method: 'POST',
         cors: 'same-origin',
         headers: {
