@@ -14,24 +14,22 @@ function Register() {
 
     return (
 
-        <>
+        <div id={'register'}>
 
-
-
-            <form className={'add-form'} onSubmit={addTask}>
-                <h1>Register</h1>
-                <div className="form-control">
+            <form id={'register-form'} onSubmit={addTask}>
+                <h1 className={'text-center'} id={'register-heading'}>Register</h1>
+                <div className="form-group">
                     <small>Username</small>
-                    <input type="text" placeholder={'username'} onChange={(e) => setUsername(e.target.value)} />
+                    <input type="text" className={'form-control'} onChange={(e) => setUsername(e.target.value)} />
                 </div>
-                <div className="form-control">
+                <div className="form-group">
                     <small>Password</small>
-                    <input type="text" placeholder={'password'} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="text" className={'form-control'} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
-                <input type="submit" name="" className="btn btn-block" value={'Register'} />
+                <input type="submit" name="" className="btn btn-block submit-btn" value={'Register'} />
             </form>
-        </>
+        </div>
     )
 }
 

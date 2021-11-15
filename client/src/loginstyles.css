@@ -1,4 +1,4 @@
-#login-form , #add-form {
+#login-form , #register-form {
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -7,7 +7,7 @@
     justify-content: space-around;
 }
 
-#login {
+#login, #register {
     width: 300px;
     margin: 50px auto;
     background-color: #161b22;
@@ -32,9 +32,11 @@
     width: 35%;
     background: #211533;
     text-decoration: none;
+    color: #fff;
+
 }
 
-#login-heading {
+#login-heading, #register-heading {
     color: darkslategrey;
     text-decoration: none;
 }
