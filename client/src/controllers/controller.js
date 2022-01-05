@@ -2,7 +2,7 @@ const addTaskController = async (task) => {
     if (!localStorage.hasOwnProperty('token')) {
         return false
     }
-    const res = await fetch('/api/tasks/add', {
+    const res = await fetch('http://localhost:5000/api/tasks/add', {
         method: 'PUT',
         cors: 'same-origin',
         headers: {
@@ -20,7 +20,7 @@ const deleteTaskController = async (id) => {
     if (!localStorage.hasOwnProperty('token')) {
         return false
     }
-    const res = await fetch('/api/tasks', {
+    const res = await fetch('http://localhost:5000/api/tasks', {
         method: 'DELETE',
         cors: 'same-origin',
         headers: {
@@ -39,7 +39,7 @@ const getTasksController = async () => {
     if (!localStorage.hasOwnProperty('token')) {
         return false
     }
-    const res = await fetch(`/api/tasks`, {
+    const res = await fetch(`http://localhost:5000/api/tasks`, {
         method: 'GET',
         cors: 'same-origin',
         headers: {
@@ -55,7 +55,7 @@ const taskToggleController = async (id, done) => {
     if (!localStorage.hasOwnProperty('token')) {
         return false
     }
-    const res = await fetch('/api/tasks', {
+    const res = await fetch('http://localhost:5000/api/tasks', {
         method: 'PUT',
         cors: 'same-origin',
         headers: {

@@ -19,7 +19,7 @@ function Login(props) {
     return (
         <div id={'login'}>
             <form id={'login-form'} onSubmit={login}>
-                <h1 class={'text-center'} id={'login-heading'}>Login</h1>
+                <h1 className={'text-center'} id={'login-heading'}>Login</h1>
                 <div className="form-group">
                     <small htmlFor="">Username</small>
                     <input type="text" className={'form-control'} onChange={(e) => setUsername(e.target.value)}/>

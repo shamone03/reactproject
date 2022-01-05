@@ -1,14 +1,13 @@
 require('dotenv').config()
 
 const addUserController = async (username, password) => {
-    const res = await fetch('/api/users', {
+    const res = await fetch('http://localhost:5000/api/users', {
         method: 'POST',
-        cors: 'same-origin',
-        headers: {
-            'Origin': `/`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username: username, password: password})
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            "username": username,
+            "password": password
+        })
     })
     return res.status === 200
 }
@@ -16,28 +15,27 @@ const addUserController = async (username, password) => {
 //logs in user, stores token in localStorage
 const loginUser = async (username, password) => {
     
-    const res = await fetch(`/api/login`, {
+    const res = await fetch(`http://localhost:5000/api/login`, {
         method: 'POST',
-        cors: 'same-origin',
-        headers: {
-            'Origin': `/`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username: username, password: password})
-    })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            "username": username,
+            "password": password
+        })
+        // redirect: 'follow'
+      })
     if (res.status === 200) {
         const data = await res.json()
         localStorage.setItem("token", data.token)
         return {success: true, token: data.token}
     } else {
         return {success: false}
-    }
+    }           
 }
 
 const verifyUser = async () => {
-    const res = await fetch('/api/verify', {
+    const res = await fetch('http://localhost:5000/api/verify', {
         method: 'GET',
-        cors: 'same-origin',
         headers: {
             'Origin': `/`,
             'Content-Type': 'application/json',

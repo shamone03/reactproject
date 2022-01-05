@@ -1,4 +1,4 @@
-import {HashRouter, Link, Route, Switch} from 'react-router-dom'
+import {Link, Route, Routes, BrowserRouter} from 'react-router-dom'
 // import './index.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './index2.css'
@@ -9,7 +9,7 @@ import Login from './components/Login'
 
 function App() {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <div className={'App'}>
                 <nav className={'nav nav-pills nav-fill'}>
                     <Link className={'nav-link nav-item'} to={'/register'}>Register</Link>
@@ -18,13 +18,13 @@ function App() {
                     
                 
                 </nav>
-                <Switch>
-                    <Route exact path={'/'} component={Home}/>
-                    <Route path={'/register'} component={Register}/>
-                    <Route path={'/login'} component={Login}/>
-                </Switch>
+                <Routes>
+                    <Route exact path={'/'} element={<Home/>}/>
+                    <Route path={'/register'} element={<Register/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
+                </Routes>
             </div>
-        </HashRouter>
+        </BrowserRouter>
 
     )
 }

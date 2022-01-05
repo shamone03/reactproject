@@ -10,7 +10,7 @@ import {
     taskToggleController
 } from '../controllers/controller'
 import jwt from 'jsonwebtoken'
-import {Redirect} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {verifyUser} from "../controllers/userController";
 
 require('dotenv').config()
@@ -79,7 +79,7 @@ function Home() {
     return (
 
         <div className="container">
-            {verified ? (<Redirect to={'/login'}/>) : ''}
+            {verified ? (<Navigate to={'/login'}/>) : ''}
             {localStorage.hasOwnProperty('token') ? (<h1>{jwt.decode(localStorage.getItem('token')).username}</h1>) : (
                 <p>not logged in</p>)}
             <Header title='hello' toggleShowAddTask={toggleShowAddTask} showAddTask={showAddTask}/>
